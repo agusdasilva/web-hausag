@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── TBJ Amoun – Fuente del Banner ─────────────────────────────────
+   Descargá el archivo .ttf o .otf desde https://fontmeme.com/fuentes/fuente-tbj-amoun/
+   o desde https://www.dafontfree.io/tbj-amoun-font/
+   y colocalo en: public/assets/fonts/TBJAmoun.ttf
+   ─────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'TBJ Amoun';
+  src: url('/assets/fonts/tbj-amoun/Amoun Lite Edition.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+html {
+  background-color: #111111;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: transparent;
+  color: #f3f4f6;
+  scroll-behavior: smooth;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
