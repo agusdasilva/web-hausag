@@ -17,50 +17,50 @@ export class Home implements OnInit, OnDestroy {
       name: 'Grifería Niza – Oro Cepillado',
       category: 'Griferías de Cocina',
       image: '/assets/images/productos ambientados/HAUS-1027.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Griferías' }
+      link: '/catalogo/131',
+      queryParams: {}
     },
     {
       name: 'Radiador 500mm · 6 Elementos',
       category: 'Calefacción',
       image: '/assets/images/productos ambientados/HAUS-1005.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Calefacción' }
+      link: '/catalogo/109',
+      queryParams: {}
     },
     {
       name: 'Grifería Riga – Cuello Profesional',
       category: 'Griferías de Cocina',
       image: '/assets/images/productos ambientados/HAUS-1024.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Griferías' }
+      link: '/catalogo/128',
+      queryParams: {}
     },
     {
       name: 'Grifería Niza – Negro & Cobre',
       category: 'Griferías de Cocina',
       image: '/assets/images/productos ambientados/HAUS-1025.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Griferías' }
+      link: '/catalogo/129',
+      queryParams: {}
     },
     {
       name: 'Grifería Lyon – Cromo Brillante',
       category: 'Griferías de Cocina',
       image: '/assets/images/productos ambientados/HAUS-1044.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Griferías' }
+      link: '/catalogo/148',
+      queryParams: {}
     },
     {
       name: 'Toallero Radiador Cromado 77×45',
       category: 'Calefacción',
       image: '/assets/images/productos ambientados/TOALLERO-CR.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Calefacción' }
+      link: '/catalogo/125',
+      queryParams: {}
     },
     {
       name: 'Toallero Radiador Blanco 77×45',
       category: 'Calefacción',
       image: '/assets/images/productos ambientados/HAUS-1046.jpg',
-      link: '/catalogo',
-      queryParams: { category: 'Calefacción' }
+      link: '/catalogo/150',
+      queryParams: {}
     }
   ];
 
