@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build & caches
+.angular/
+*/.angular/
+dist/
+*/dist/
+.tempmediaStorage/
+
+# Environment & logs
+*.log
+.env
+.DS_Store
+Thumbs.db
