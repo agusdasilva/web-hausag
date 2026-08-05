@@ -1,27 +1,137 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-32 fade-in text-white">
-  <div class="text-center mb-16">
-    <h1 class="text-5xl md:text-6xl font-serif font-medium text-white tracking-wide">Sobre Nosotros</h1>
-    <p class="mt-4 text-xl text-white/70 max-w-2xl mx-auto font-extralight tracking-wide">Conoce la historia detrás de Hausag y nuestra visión para tu hogar.</p>
+  
+  <!-- Header -->
+  <div class="text-center mb-16 max-w-3xl mx-auto">
+    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/20 bg-white/5 text-white/90 mb-4 backdrop-blur-md">
+      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+      Más de 50 años de trayectoria y confianza
+    </span>
+    <h1 class="text-5xl md:text-6xl font-serif font-medium text-white tracking-wide leading-tight">Sobre Nosotros</h1>
+    <p class="mt-4 text-lg md:text-xl text-white/70 font-extralight tracking-wide leading-relaxed">
+      Medio siglo creando experiencias de diseño, confort y durabilidad para cada rincón de tu hogar.
+    </p>
   </div>
 
-  <div class="md:flex items-center gap-12">
-    <div class="w-full md:w-1/2 bg-black-surface/70 backdrop-blur-md p-2 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-      <img src="https://images.unsplash.com/photo-1577902047814-2c259ccce1f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Arquitectura moderna" class="rounded-xl shadow-lg w-full h-full object-cover opacity-80 mix-blend-screen">
+  <!-- Main Story & Map Section -->
+  <div class="md:flex items-stretch gap-12 mb-20">
+    
+    <!-- Dónde Encontrarnos / Mapa de Google -->
+    <div class="w-full md:w-1/2 flex flex-col">
+      <div class="h-full bg-black-surface/70 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between">
+        
+        <!-- Info Cabecera del Mapa -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-white/90 font-mono">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              ¿Dónde encontrarnos?
+            </span>
+            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded border border-white/20 text-white/60">Showroom & Salón</span>
+          </div>
+          <h3 class="text-xl font-serif font-medium text-white mb-1">El Águila Sanitarios</h3>
+          <p class="text-sm text-white/80 font-extralight flex items-center gap-2">
+            <span class="font-medium text-white">Av. Jara 866</span> — Mar del Plata, Buenos Aires
+          </p>
+        </div>
+
+        <!-- Google Maps Embed interactivo -->
+        <div class="relative w-full h-[280px] md:h-[320px] rounded-xl overflow-hidden border border-white/10 mb-4 bg-black/40">
+          <iframe 
+            src="https://maps.google.com/maps?q=Av.+Jara+866,+Mar+del+Plata,+Provincia+de+Buenos+Aires&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0; filter: grayscale(100%) invert(90%) contrast(85%);" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación El Águila Sanitarios - Jara 866">
+          </iframe>
+        </div>
+
+        <!-- Botón de apertura directa y horarios -->
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div class="text-white/60 font-extralight text-center sm:text-left">
+            <p><strong class="text-white/80 font-medium">Horarios:</strong> Lun a Vie 8:00 - 18:00 | Sáb 8:30 - 13:00</p>
+          </div>
+          <a href="https://maps.google.com/?q=Av.+Jara+866,+Mar+del+Plata" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white hover:text-black-pure border border-white/20 text-white font-bold text-[11px] uppercase tracking-widest transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Abrir en Google Maps
+          </a>
+        </div>
+
+      </div>
     </div>
     
-    <div class="md:w-1/2 mt-12 md:mt-0">
-      <h2 class="text-4xl font-serif font-medium text-white mb-6 tracking-wide">Nuestra Historia</h2>
-      <div class="space-y-6 text-white/70 font-extralight leading-loose tracking-wide">
+    <!-- Contenido Historia -->
+    <div class="md:w-1/2 mt-10 md:mt-0 flex flex-col justify-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-medium text-white mb-6 tracking-wide">Nuestra Historia</h2>
+      
+      <div class="space-y-5 text-white/75 font-extralight leading-relaxed tracking-wide text-base">
         <p>
-          Hausag nace como una marca secundaria de <strong class="text-white font-medium">El Aguila Sanitarios</strong>, con el objetivo de ofrecer una línea exclusiva y moderna en griferías y sistemas de calefacción. 
+          Con <strong class="text-white font-medium">más de 50 años en el mercado</strong> a través de <strong class="text-white font-medium">El Águila Sanitarios</strong>, consolidamos nuestra experiencia como referentes en el rubro sanitario y de la construcción.
         </p>
         <p>
-          Nuestra misión es proveer a constructores, profesionales y dueños de hogares con productos que no solo cumplan una función, sino que sean el centro estético de sus espacios.
+          <strong class="text-white font-medium">Hausag</strong> nace como nuestra firma insignia de alta gama, pensada para responder a las exigencias de la arquitectura contemporánea: líneas sofisticadas, materiales nobles como el latón macizo y tecnologías que optimizan el rendimiento del agua y la calefacción.
+        </p>
+        <p>
+          Acompañamos a arquitectos, diseñadores, instaladores y familias que eligen transformar sus ambientes en espacios únicos con productos garantizados y servicio de asesoramiento personalizado.
         </p>
       </div>
-      <div class="border-l-[1px] border-white/30 pl-6 py-2 my-10 bg-black-surface/30 p-6 rounded-r-lg">
-        <p class="text-2xl font-serif font-medium italic text-white/90 leading-relaxed">"Diseño, elegancia y calidad en cada gota y en cada ambiente."</p>
+
+      <!-- Quote Box -->
+      <div class="my-8 p-6 rounded-xl border border-white/25 shadow-[0_20px_40px_rgba(0,0,0,0.9)] relative overflow-hidden" 
+           style="background-color: #000000 !important; border-left: 4px solid #ffffff;">
+        <p class="text-xl md:text-2xl font-serif font-normal italic text-white leading-snug">
+          "Diseño, elegancia y calidad en cada gota y en cada ambiente."
+        </p>
       </div>
+
+      <!-- Botón CTA -->
+      <div class="flex items-center gap-4 pt-2">
+        <a routerLink="/catalogo" 
+           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-white text-black-pure font-bold text-xs uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:-translate-y-0.5 shadow-lg">
+          Explorar Catálogo
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <a routerLink="/contacto" 
+           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+          Contactar
+        </a>
+      </div>
+
     </div>
   </div>
+
+  <!-- Métricas / Pilares -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+    
+    <div class="p-6 rounded-xl bg-black-surface/50 border border-white/10 backdrop-blur-sm">
+      <div class="text-3xl font-serif font-semibold text-white mb-1">+50 Años</div>
+      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Trayectoria</div>
+      <p class="text-xs text-white/70 font-extralight leading-relaxed">Décadas de confianza construyendo relaciones sólidas con el mercado argentino.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-black-surface/50 border border-white/10 backdrop-blur-sm">
+      <div class="text-3xl font-serif font-semibold text-white mb-1">100%</div>
+      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Calidad Premium</div>
+      <p class="text-xs text-white/70 font-extralight leading-relaxed">Selección de materiales resistentes, cartuchos cerámicos y finos acabados.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-black-surface/50 border border-white/10 backdrop-blur-sm">
+      <div class="text-3xl font-serif font-semibold text-white mb-1">5 Años</div>
+      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Garantía Oficial</div>
+      <p class="text-xs text-white/70 font-extralight leading-relaxed">Respaldo postventa integral y repuestos originales disponibles.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-black-surface/50 border border-white/10 backdrop-blur-sm">
+      <div class="text-3xl font-serif font-semibold text-white mb-1">Asesoría</div>
+      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Personalizada</div>
+      <p class="text-xs text-white/70 font-extralight leading-relaxed">Atención experta para proyectos residenciales, comerciales y profesionales.</p>
+    </div>
+
+  </div>
+
 </div>

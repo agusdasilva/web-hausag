@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { ThemeService } from '../../services/theme.service';
   selector: 'app-product-detail',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
@@ -20,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
   error: boolean = false;
   errorMessage: string = '';
   quantity: number = 1;
+  show3D: boolean = false;
   addedMessage: boolean = false;
   
   // Theme state from service
@@ -34,6 +36,16 @@ export class ProductDetailComponent implements OnInit {
     private themeService: ThemeService
   ) {}
 
+  get has3DModel(): boolean {
+    if (!this.product) return false;
+    // El modelo 3D solo está disponible para el producto 131 (HAUS-1027)
+    return this.product.id === 131 || this.product.sku === 'HAUS-1027';
+  }
+
+  get model3DUrl(): string {
+    return '/assets/models/HAUS-1027.glb';
+  }
+
   ngOnInit(): void {
     this.themeSub = this.themeService.theme$.subscribe(t => {
       this.theme = t;
@@ -43,6 +55,7 @@ export class ProductDetailComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       console.log('ID from route:', id);
+      this.show3D = false; // Resetear vista 3D al cambiar de producto
       
       if (id) {
         this.loading = true; // reset loading on route change
