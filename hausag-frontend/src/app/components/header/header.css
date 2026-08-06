@@ -1,0 +1,37 @@
+/* ─── Hausag Logo Interactivo & Animaciones ────────────────────────── */
+
+.logo-ball {
+  will-change: transform;
+}
+
+.group:hover .ball-red {
+  animation: swapRedOnce 0.55s linear forwards;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.85);
+}
+
+.group:hover .ball-blue {
+  animation: swapBlueOnce 0.55s linear forwards;
+  box-shadow: 0 0 12px rgba(0, 71, 187, 0.85);
+}
+
+/* Roja: arco por arriba → velocidad constante, suavidad dada por la curva */
+@keyframes swapRedOnce {
+  0%   { transform: translate(0,    0)    scale(1);    }
+  15%  { transform: translate(24%,  -28%) scale(1.05); }
+  30%  { transform: translate(48%,  -50%) scale(1.1);  }
+  50%  { transform: translate(81%,  -58%) scale(1.1);  }
+  70%  { transform: translate(115%, -40%) scale(1.05); }
+  85%  { transform: translate(140%, -15%) scale(1.02); }
+  100% { transform: translate(162%,  0)   scale(1);    }
+}
+
+/* Azul: arco espejado por abajo */
+@keyframes swapBlueOnce {
+  0%   { transform: translate(0,     0)   scale(1);    }
+  15%  { transform: translate(-24%,  22%) scale(0.95); }
+  30%  { transform: translate(-48%,  40%) scale(0.9);  }
+  50%  { transform: translate(-81%,  48%) scale(0.9);  }
+  70%  { transform: translate(-115%, 34%) scale(0.95); }
+  85%  { transform: translate(-140%, 12%) scale(0.98); }
+  100% { transform: translate(-162%,  0)  scale(1);    }
+}

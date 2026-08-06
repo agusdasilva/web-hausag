@@ -12,17 +12,22 @@ import { Subscription, filter } from 'rxjs';
   styleUrl: './app.css',
 })
 export class App implements OnInit, OnDestroy {
-  isHomePage = false;
+  hasHeroBanner = false;
   private routerSub: Subscription | undefined;
 
   constructor(private router: Router) {}
 
+  private checkHeroBanner(url: string): boolean {
+    const cleanUrl = url ? url.split('?')[0] : '';
+    return cleanUrl === '/' || cleanUrl === '/catalogo';
+  }
+
   ngOnInit() {
-    this.isHomePage = this.router.url === '/';
+    this.hasHeroBanner = this.checkHeroBanner(this.router.url);
     this.routerSub = this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)
     ).subscribe((e: any) => {
-      this.isHomePage = e.urlAfterRedirects === '/';
+      this.hasHeroBanner = this.checkHeroBanner(e.urlAfterRedirects || e.url);
     });
   }
 
