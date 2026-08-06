@@ -1,6 +1,6 @@
 <div class="flex flex-col min-h-screen" style="background-image: url('/assets/images/dark_texture.webp'); background-attachment: fixed; background-size: cover; background-position: center;">
   <app-header></app-header>
-  <main class="flex-grow" [class.pt-20]="!isHomePage">
+  <main class="flex-grow" [class.pt-24]="!hasHeroBanner">
     <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>

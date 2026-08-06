@@ -1,0 +1,21 @@
+/* Ocultar scrollbar horizontal de los tabs pero mantener funcional */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 20s ease-out infinite alternate;
+}

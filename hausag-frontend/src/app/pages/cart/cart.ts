@@ -19,7 +19,18 @@ export class CartComponent {
   }
 
   decreaseQuantity(productId: number, currentQuantity: number) {
-    this.cartService.updateQuantity(productId, currentQuantity - 1);
+    if (currentQuantity > 1) {
+      this.cartService.updateQuantity(productId, currentQuantity - 1);
+    }
+  }
+
+  onQuantityInput(productId: number, event: any) {
+    let val = parseInt(event.target.value, 10);
+    if (isNaN(val) || val < 1) {
+      val = 1;
+    }
+    event.target.value = val;
+    this.cartService.updateQuantity(productId, val);
   }
 
   removeItem(productId: number) {

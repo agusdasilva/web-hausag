@@ -1,93 +1,246 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 fade-in text-white pt-32">
-  <div class="flex flex-col md:flex-row gap-10">
-    
-    <!-- Sidebar de Filtros -->
-    <aside class="w-full md:w-1/4 bg-black-surface/70 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-      <h2 class="text-2xl font-serif font-medium text-white mb-6 border-b border-white/10 pb-4 tracking-wide">Filtros</h2>
-      
-      <!-- Buscador -->
-      <div class="mb-8">
-        <label for="search" class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Buscar producto</label>
-        <div class="relative">
-          <input type="text" id="search" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" 
-            class="block w-full px-4 py-3 border-2 border-black-border bg-black-elevated text-white rounded-md focus:ring-0 focus:border-white/50 transition-colors sm:text-sm placeholder-white/30 outline-none"
-            placeholder="Ej. Monocomando...">
-        </div>
-      </div>
+<div class="min-h-screen fade-in text-white">
 
-      <!-- Categorías -->
-      <div>
-        <h3 class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Categorías</h3>
-        <ul class="space-y-2">
-          <li *ngFor="let cat of categories" class="group relative">
-            <button (click)="onCategoryChange(cat)" 
-              class="text-left w-full transition-all font-medium text-sm px-3 py-2 rounded-md border"
-              [ngClass]="{'bg-white text-black-pure border-white font-bold': selectedCategory === cat || selectedCategory.startsWith(cat + ' -'), 'bg-black-elevated text-white/70 border-black-border hover:border-white/30 hover:text-white': selectedCategory !== cat && !selectedCategory.startsWith(cat + ' -')}">
+  <!-- ──── Hero Banner Superior (Desde el inicio de página, bajo header transparente) ──── -->
+  <section class="relative w-full overflow-hidden bg-black-pure border-b border-white/10 min-h-[480px] md:min-h-[540px] flex items-center">
+    
+    <!-- Imagen de fondo (Interior de hogar detallado - mayor brillo) -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 z-10" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.30) 35%, rgba(0,0,0,0.05) 70%, transparent 100%);"></div>
+      <!-- Gradiente arriba/abajo muy suave -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 z-10"></div>
+      <img src="/assets/images/catalog_banner.jpg" 
+           alt="Hausag Interior Arquitectónico" 
+           class="w-full h-full object-cover object-center opacity-100 transform scale-105 animate-subtle-zoom">
+    </div>
+
+    <!-- Contenido del Banner -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20 md:pt-44 md:pb-24 w-full">
+      <div class="max-w-3xl">
+        
+        <!-- Subtítulo con línea de acento -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-10 h-[1px] bg-white/70"></div>
+          <span class="text-white/80 font-semibold uppercase tracking-[0.4em] text-[11px]">
+            Colección Hausag
+          </span>
+        </div>
+
+        <!-- Título Principal -->
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-medium text-white mb-6 leading-tight tracking-wide drop-shadow-2xl font-serif"
+            style="font-family: 'TBJ Amoun', serif;">
+          Catálogo de Productos
+        </h1>
+
+        <!-- Descripción -->
+        <p class="text-base sm:text-lg text-white/80 leading-relaxed font-extralight tracking-wide max-w-2xl drop-shadow-lg">
+          Diseño, vanguardia y sofisticación pensados para integrarse a la arquitectura de tus ambientes. Descubrí nuestra selección de griferías de autor y sistemas de calefacción.
+        </p>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ──── Barra Sticky de Categorías y Buscador (Fondo Gris #1a1a1a como footer) ──── -->
+  <div class="sticky top-24 z-30 bg-[#1a1a1a] backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- Categorías (Izquierda) -->
+        <div class="flex items-center gap-2 relative">
+          
+          <!-- Botón Todos -->
+          <button (click)="onCategoryChange('Todos')"
+            class="px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] rounded-lg transition-all duration-300 relative"
+            [ngClass]="{
+              'bg-white text-black font-extrabold shadow-md': selectedCategory === 'Todos',
+              'text-white/80 hover:text-white hover:bg-white/10': selectedCategory !== 'Todos'
+            }">
+            Todos
+          </button>
+
+          <!-- Botón Griferías con Dropdown al pasar el cursor (hover) -->
+          <div class="relative group">
+            <button (click)="onCategoryChange('Griferías')"
+              class="px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] rounded-lg transition-all duration-300 flex items-center gap-1.5"
+              [ngClass]="{
+                'bg-white text-black font-extrabold shadow-md': selectedCategory === 'Griferías' || selectedCategory.startsWith('Griferías -'),
+                'text-white/80 hover:text-white hover:bg-white/10': selectedCategory !== 'Griferías' && !selectedCategory.startsWith('Griferías -')
+              }">
+              <span>Griferías</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- Mini Menú Desplegable hacia abajo al hacer hover -->
+            <div class="absolute top-full left-0 pt-2 z-50 min-w-[170px] opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+              <div class="bg-[#141414] border border-white/15 rounded-xl shadow-[0_15px_35px_rgba(0,0,0,0.8)] p-1.5 flex flex-col gap-1">
+                <button (click)="onCategoryChange('Griferías'); $event.stopPropagation()"
+                  class="w-full text-left px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.15em] rounded-lg transition-colors flex items-center justify-between"
+                  [ngClass]="{
+                    'bg-white text-black font-extrabold': selectedCategory === 'Griferías',
+                    'text-white/70 hover:text-white hover:bg-white/10': selectedCategory !== 'Griferías'
+                  }">
+                  <span>Ver Todas</span>
+                </button>
+                <button (click)="onCategoryChange('Griferías - Cocina'); $event.stopPropagation()"
+                  class="w-full text-left px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.15em] rounded-lg transition-colors flex items-center justify-between"
+                  [ngClass]="{
+                    'bg-white text-black font-extrabold': selectedCategory === 'Griferías - Cocina',
+                    'text-white/70 hover:text-white hover:bg-white/10': selectedCategory !== 'Griferías - Cocina'
+                  }">
+                  <span>Cocina</span>
+                  <span *ngIf="selectedCategory === 'Griferías - Cocina'" class="w-1.5 h-1.5 rounded-full bg-black"></span>
+                </button>
+                <button (click)="onCategoryChange('Griferías - Baño'); $event.stopPropagation()"
+                  class="w-full text-left px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.15em] rounded-lg transition-colors flex items-center justify-between"
+                  [ngClass]="{
+                    'bg-white text-black font-extrabold': selectedCategory === 'Griferías - Baño',
+                    'text-white/70 hover:text-white hover:bg-white/10': selectedCategory !== 'Griferías - Baño'
+                  }">
+                  <span>Baño</span>
+                  <span *ngIf="selectedCategory === 'Griferías - Baño'" class="w-1.5 h-1.5 rounded-full bg-black"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Otras categorías dinámicas (ej. Calefacción) -->
+          <ng-container *ngFor="let cat of categories">
+            <button *ngIf="cat !== 'Todos' && cat !== 'Griferías'"
+              (click)="onCategoryChange(cat)"
+              class="px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] rounded-lg transition-all duration-300 relative"
+              [ngClass]="{
+                'bg-white text-black font-extrabold shadow-md': selectedCategory === cat,
+                'text-white/80 hover:text-white hover:bg-white/10': selectedCategory !== cat
+              }">
               {{ cat }}
             </button>
-            
-            <!-- Subcategorías para Griferías (On Hover) -->
-            <div *ngIf="cat === 'Griferías'" class="hidden group-hover:flex flex-col ml-4 mt-2 space-y-1 border-l border-white/20 pl-2">
-              <button (click)="onCategoryChange('Griferías - Cocina')"
-                class="text-left w-full transition-all text-xs px-2 py-1.5 rounded-md"
-                [ngClass]="{'text-white bg-white/10 font-bold': selectedCategory === 'Griferías - Cocina', 'text-white/50 hover:text-white hover:bg-white/5': selectedCategory !== 'Griferías - Cocina'}">
-                Cocina
-              </button>
-              <button (click)="onCategoryChange('Griferías - Baño')"
-                class="text-left w-full transition-all text-xs px-2 py-1.5 rounded-md"
-                [ngClass]="{'text-white bg-white/10 font-bold': selectedCategory === 'Griferías - Baño', 'text-white/50 hover:text-white hover:bg-white/5': selectedCategory !== 'Griferías - Baño'}">
-                Baño
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </aside>
+          </ng-container>
 
-    <!-- Grilla de Productos -->
-    <div class="w-full md:w-3/4">
-      <div class="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
-        <h1 class="text-4xl font-serif font-medium text-white tracking-wide">Catálogo de Productos</h1>
-        <span class="text-sm font-bold text-white/50">{{ filteredProducts.length }} resultados</span>
-      </div>
-      
-      <div *ngIf="filteredProducts.length === 0" class="text-center py-20 bg-black-surface/70 backdrop-blur-md border border-white/10 rounded-xl">
-        <p class="text-lg text-white/50 font-bold uppercase tracking-widest">No se encontraron productos.</p>
-      </div>
+        </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Tarjeta de Producto -->
-        <a *ngFor="let product of filteredProducts" [routerLink]="['/catalogo', product.id]" class="group relative bg-black-surface/70 backdrop-blur-md border border-white/10 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-white/30 transition-all hover:-translate-y-1 overflow-hidden flex flex-col cursor-pointer">
+        <!-- Buscador con fondo blanco (Derecha) -->
+        <div class="relative w-full md:w-80 flex-shrink-0">
+          <div class="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+            <svg class="w-4 h-4 text-black/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <input type="text" id="search" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()"
+            class="w-full pl-10 pr-9 py-2 bg-white text-black font-medium text-xs rounded-lg placeholder-black/50 outline-none focus:ring-2 focus:ring-black/20 transition-all shadow-sm border border-white"
+            placeholder="Buscar por nombre o SKU...">
           
-          <!-- Imagen -->
-          <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-black-pure relative border-b border-black-border">
-            <!-- Etiquetas -->
-            <div class="absolute top-3 left-3 z-10 flex flex-col gap-2">
-              <span *ngIf="product.tag" class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-lg"
-                [ngClass]="{'bg-white text-black-pure': product.tag === 'Nuevo', 'bg-red-600 text-white': product.tag === 'Sin stock'}">
+          <button *ngIf="searchTerm" (click)="searchTerm = ''; onSearchChange()" 
+                  class="absolute inset-y-0 right-2.5 flex items-center text-black/40 hover:text-black transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── Contenedor Principal con Fondo Blanco (Conectado arriba con filtro y abajo con footer) ──── -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="bg-white text-neutral-900 border-x border-neutral-200/80 shadow-2xl px-4 sm:px-6 lg:px-8 pt-8 pb-16 min-h-[60vh]">
+
+      <!-- Contador y estado de filtros -->
+      <div class="flex items-center justify-between mb-8 pb-4 border-b border-neutral-200">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 font-semibold">
+            {{ filteredProducts.length }} producto{{ filteredProducts.length !== 1 ? 's' : '' }} encontrado{{ filteredProducts.length !== 1 ? 's' : '' }}
+          </span>
+          <span *ngIf="selectedCategory !== 'Todos'" class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-800 rounded-full border border-neutral-300">
+            {{ selectedCategory }}
+          </span>
+        </div>
+
+        <button *ngIf="selectedCategory !== 'Todos' || searchTerm" 
+                (click)="selectedCategory = 'Todos'; searchTerm = ''; applyFilters()"
+                class="text-xs font-bold uppercase tracking-widest text-neutral-500 hover:text-black transition-colors underline underline-offset-4">
+          Limpiar Filtros
+        </button>
+      </div>
+
+      <!-- Sin resultados -->
+      <div *ngIf="filteredProducts.length === 0" class="text-center py-28 bg-neutral-50 border border-neutral-200 rounded-2xl">
+        <svg class="w-12 h-12 text-neutral-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-neutral-700 font-bold uppercase tracking-[0.3em] text-sm mb-2">No se encontraron productos</p>
+        <p class="text-neutral-400 text-xs font-light">Intentá con otra categoría o término de búsqueda.</p>
+      </div>
+
+      <!-- Tarjetas de Productos (Filas de 4 columnas con tamaños optimizados) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <a *ngFor="let product of filteredProducts"
+           [routerLink]="['/catalogo', product.id]"
+           class="group relative bg-white border border-neutral-300 hover:border-neutral-900/60 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col cursor-pointer overflow-hidden">
+
+          <!-- Contenedor de Imagen -->
+          <div class="relative w-full aspect-[4/3] bg-neutral-50/80 overflow-hidden flex items-center justify-center p-4 border-b border-neutral-200">
+            
+            <!-- Badges flotantes -->
+            <div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
+              <span *ngIf="product.tag" 
+                    class="inline-flex items-center px-2 py-0.5 text-[9px] font-black uppercase tracking-widest rounded shadow-sm"
+                    [ngClass]="{
+                      'bg-black text-white': product.tag === 'Nuevo',
+                      'bg-red-600 text-white': product.tag === 'Sin stock'
+                    }">
                 {{ product.tag }}
               </span>
             </div>
 
-            <img [src]="product.image_url" [alt]="product.title" class="w-full h-56 object-contain bg-white p-2 group-hover:scale-105 transition-transform duration-500 opacity-100">
+            <!-- Badge 3D interactivo para el producto 131 -->
+            <div *ngIf="product.id === 131" class="absolute top-3 right-3 z-10">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-black text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm">
+                <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                3D
+              </span>
+            </div>
+
+            <!-- Imagen del producto -->
+            <img [src]="product.image_url" 
+                 [alt]="product.title"
+                 class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out">
           </div>
 
-          <!-- Información -->
-          <div class="p-6 flex flex-col flex-grow bg-black-surface/50">
-            <p class="text-[10px] text-white/50 mb-2 uppercase tracking-widest font-bold">{{ product.category }}</p>
-            <h3 class="text-lg font-serif font-medium text-white line-clamp-2 mb-3 leading-snug group-hover:text-white/80 transition-colors">
+          <!-- Información del producto -->
+          <div class="p-4 flex flex-col flex-grow bg-[#e7e7e7]">
+            
+            <!-- Título -->
+            <h3 class="text-sm font-serif font-medium text-neutral-900 leading-snug mb-1.5 line-clamp-2 group-hover:text-black transition-colors min-h-[2.5rem]">
               {{ product.title }}
             </h3>
-            <p class="text-sm text-white/70 line-clamp-2 font-extralight">{{ product.short_description }}</p>
-            
-            <div class="pt-4 border-t border-black-border flex justify-between items-center mt-auto">
-              <p class="text-[11px] text-white/40 font-mono uppercase tracking-widest">SKU: {{ product.sku }}</p>
-              <svg class="w-5 h-5 text-white/40 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+            <!-- SKU -->
+            <span class="text-[9px] font-mono uppercase tracking-[0.18em] text-neutral-500 mb-2">SKU: {{ product.sku }}</span>
+
+            <!-- Footer de la tarjeta con acción -->
+            <div class="flex items-center justify-between pt-3 border-t border-neutral-300/70 mt-auto">
+              <button (click)="addToBudget(product, $event)"
+                      class="w-full flex items-center justify-center gap-2 bg-[#009929] hover:bg-[#008223] text-white font-bold text-[10px] uppercase tracking-[0.12em] py-2.5 px-3 rounded-lg shadow-[0_3px_10px_rgba(0,153,41,0.25)] hover:shadow-[0_5px_15px_rgba(0,153,41,0.4)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 border border-[#00b330]/40">
+                <svg class="w-3.5 h-3.5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="truncate">Agregar al presupuesto</span>
+              </button>
             </div>
+
           </div>
+
         </a>
       </div>
-    </div>
+
+    </main>
 
   </div>
+
 </div>

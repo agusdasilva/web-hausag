@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ProductService, Product } from '../../services/product';
+import { CartService } from '../../services/cart.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -22,9 +23,18 @@ export class CatalogComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
+    private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
+
+  addToBudget(product: Product, event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.cartService.addToCart(product, 1);
+    this.router.navigate(['/carrito']);
+  }
 
   ngOnInit(): void {
     // Fetch all products once
