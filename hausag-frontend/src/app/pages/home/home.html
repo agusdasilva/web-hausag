@@ -65,11 +65,15 @@
     <!-- Header -->
     <div class="text-center mb-14">
       <div class="flex items-center justify-center gap-4 mb-4">
-        <div class="w-8 h-[1px] bg-white/60"></div>
-        <span class="text-xs text-white/70 font-bold tracking-[0.4em] uppercase">Selección</span>
-        <div class="w-8 h-[1px] bg-white/60"></div>
+        <div class="w-8 h-[1px] transition-colors duration-300"
+             [ngClass]="theme === 'light' ? 'bg-black' : 'bg-white/60'"></div>
+        <span class="text-xs font-bold tracking-[0.4em] uppercase transition-colors duration-300"
+              [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Selección</span>
+        <div class="w-8 h-[1px] transition-colors duration-300"
+             [ngClass]="theme === 'light' ? 'bg-black' : 'bg-white/60'"></div>
       </div>
-      <h2 class="text-4xl sm:text-5xl font-serif font-medium tracking-wide text-white leading-tight">
+      <h2 class="text-4xl sm:text-5xl font-serif font-medium tracking-wide leading-tight transition-colors duration-300"
+          [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">
         Productos Destacados
       </h2>
     </div>
@@ -126,7 +130,11 @@
 
     <!-- CTA -->
     <div class="mt-12 text-center">
-      <a routerLink="/catalogo" class="inline-flex items-center gap-3 px-10 py-4 border border-white/30 text-xs font-bold uppercase tracking-[0.25em] text-white hover:bg-white hover:text-black transition-all duration-300">
+      <a routerLink="/catalogo" 
+         class="inline-flex items-center gap-3 px-10 py-4 border text-xs font-bold uppercase tracking-[0.25em] transition-all duration-300"
+         [ngClass]="theme === 'light' 
+           ? 'border-black text-black hover:bg-black hover:text-white' 
+           : 'border-white/30 text-white hover:bg-white hover:text-black'">
         Ver todos los productos
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </a>
@@ -140,11 +148,15 @@
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <div class="flex items-center justify-center gap-4 mb-4">
-        <div class="w-8 h-[1px] bg-white/60"></div>
-        <h2 class="text-xs text-white/70 font-bold tracking-[0.4em] uppercase">Categorías</h2>
-        <div class="w-8 h-[1px] bg-white/60"></div>
+        <div class="w-8 h-[1px] transition-colors duration-300"
+             [ngClass]="theme === 'light' ? 'bg-black' : 'bg-white/60'"></div>
+        <h2 class="text-xs font-bold tracking-[0.4em] uppercase transition-colors duration-300"
+            [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Categorías</h2>
+        <div class="w-8 h-[1px] transition-colors duration-300"
+             [ngClass]="theme === 'light' ? 'bg-black' : 'bg-white/60'"></div>
       </div>
-      <h2 class="mt-2 text-4xl leading-tight font-serif font-medium tracking-wide text-white sm:text-5xl">
+      <h2 class="mt-2 text-4xl leading-tight font-serif font-medium tracking-wide sm:text-5xl transition-colors duration-300"
+          [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">
         Descubre lo que ofrecemos
       </h2>
     </div>

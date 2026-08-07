@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product } from '../../services/product';
 import { CartService } from '../../services/cart.service';
@@ -30,6 +30,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService,
     private cartService: CartService,
     private cdr: ChangeDetectorRef,
@@ -121,10 +122,7 @@ export class ProductDetailComponent implements OnInit {
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
-      this.addedMessage = true;
-      setTimeout(() => {
-        this.addedMessage = false;
-      }, 3000);
+      this.router.navigate(['/carrito']);
     }
   }
 
