@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ThemeService, ThemeMode } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home.css',
 })
 export class Home implements OnInit, OnDestroy {
+  theme: ThemeMode = 'dark';
+  private themeSub: Subscription | undefined;
   currentSlide = 0;
   slideInterval: any;
+
+  constructor(private themeService: ThemeService) {}
 
   featuredProducts = [
     {
@@ -93,10 +99,16 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startCarousel();
+    this.themeSub = this.themeService.theme$.subscribe(t => {
+      this.theme = t;
+    });
   }
 
   ngOnDestroy() {
     this.stopCarousel();
+    if (this.themeSub) {
+      this.themeSub.unsubscribe();
+    }
   }
 
   startCarousel() {
