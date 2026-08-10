@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,8 +19,14 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/api/products';
-  private backendUrl = 'http://localhost:3000';
+  // En desarrollo usamos el servidor PHP local (ej: puerto 8000). En producción, ruta relativa.
+  private get backendUrl(): string {
+    return isDevMode() ? 'http://localhost:8000' : '';
+  }
+
+  private get apiUrl(): string {
+    return `${this.backendUrl}/api/products.php`;
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -33,15 +39,15 @@ export class ProductService {
 
   getProducts(search?: string, category?: string): Observable<Product[]> {
     let url = this.apiUrl + '?';
-    if (search) url += `search=${search}&`;
-    if (category) url += `category=${category}&`;
+    if (search) url += `search=${encodeURIComponent(search)}&`;
+    if (category) url += `category=${encodeURIComponent(category)}&`;
     return this.http.get<Product[]>(url).pipe(
       map(products => products.map(p => this.fixImageUrl(p)))
     );
   }
 
   getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.get<Product>(`${this.apiUrl}?id=${id}`).pipe(
       map(p => this.fixImageUrl(p))
     );
   }

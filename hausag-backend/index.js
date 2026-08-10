@@ -15,8 +15,17 @@ const imageDir = path.join(__dirname, '..', 'hausag-frontend', 'public', 'assets
 app.use('/productos', express.static(imageDir));
 
 // Obtener todos los productos (con filtros opcionales)
-app.get('/api/products', async (req, res) => {
+app.get(['/api/products', '/api/products.php'], async (req, res) => {
   try {
+    // Si viene ?id= en /products.php, devolver uno solo
+    if (req.query.id) {
+      const product = await Product.findByPk(req.query.id);
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
+      return res.json(product);
+    }
+
     const { search, category, color } = req.query;
     const where = {};
     
@@ -37,7 +46,7 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-// Obtener producto por ID
+// Obtener producto por ID (ruta antigua para Node)
 app.get('/api/products/:id', async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);

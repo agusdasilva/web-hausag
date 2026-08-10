@@ -33,7 +33,6 @@ export class CatalogComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.addToCart(product, 1);
-    this.router.navigate(['/carrito']);
   }
 
   ngOnInit(): void {

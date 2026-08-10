@@ -122,7 +122,7 @@ export class ProductDetailComponent implements OnInit {
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
-      this.router.navigate(['/carrito']);
+      // Removed redirect to let the user keep browsing
     }
   }
 

@@ -1,19 +1,36 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-32 fade-in text-white">
-  
-  <!-- Header -->
-  <div class="text-center mb-16 max-w-3xl mx-auto">
-    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/20 bg-[#1a1a1a] text-white/90 mb-4">
-      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-      Más de 50 años de trayectoria y confianza
-    </span>
-    <h1 class="text-5xl md:text-6xl font-serif font-medium text-white tracking-wide leading-tight">Sobre Nosotros</h1>
-    <p class="mt-4 text-lg md:text-xl text-white/70 font-extralight tracking-wide leading-relaxed">
-      Medio siglo creando experiencias de diseño, confort y durabilidad para cada rincón de tu hogar.
-    </p>
-  </div>
+<div class="min-h-screen fade-in text-white">
 
-  <!-- Main Story & Map Section -->
-  <div class="md:flex items-stretch gap-12 mb-20">
+  <!-- ──── Hero Banner Superior ──── -->
+  <section class="relative w-full overflow-hidden bg-black-pure border-b border-white/10 min-h-[480px] md:min-h-[500px] flex items-center">
+    
+    <!-- Imagen de fondo -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 z-10" style="background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 100%);"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 z-10"></div>
+      <img src="/assets/images/banner nosotros.jpg" 
+           alt="Sobre Nosotros Hausag" 
+           class="w-full h-full object-cover object-center opacity-100 transform scale-105 animate-subtle-zoom">
+    </div>
+
+    <!-- Contenido del Banner -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 w-full text-left">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/20 bg-[#1a1a1a]/80 backdrop-blur-sm text-white/90 mb-6 shadow-xl">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          Más de 50 años de trayectoria y confianza
+        </span>
+        <h1 class="text-5xl md:text-6xl font-serif font-medium text-white tracking-wide leading-tight drop-shadow-lg mb-4">Sobre Nosotros</h1>
+        <p class="text-lg md:text-xl text-white/90 font-extralight tracking-wide leading-relaxed drop-shadow-md">
+          Medio siglo creando experiencias de diseño, confort y durabilidad para cada rincón de tu hogar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  
+    <!-- Main Story & Map Section -->
+    <div class="md:flex items-stretch gap-12 mb-20">
     
     <!-- Dónde Encontrarnos / Mapa de Google -->
     <div class="w-full md:w-1/2 flex flex-col">
@@ -134,4 +151,5 @@
 
   </div>
 
+</div>
 </div>

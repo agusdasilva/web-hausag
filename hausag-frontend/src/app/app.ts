@@ -22,7 +22,7 @@ export class App implements OnInit, OnDestroy {
 
   private checkHeroBanner(url: string): boolean {
     const cleanUrl = url ? url.split('?')[0] : '';
-    return cleanUrl === '/' || cleanUrl === '/catalogo';
+    return cleanUrl === '/' || cleanUrl === '/catalogo' || cleanUrl === '/nosotros';
   }
 
   ngOnInit() {
