@@ -25,6 +25,30 @@
       <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-6 sm:pb-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
+          <!-- Mobile Title & Category (Visible only on mobile, above image) -->
+          <div class="lg:hidden flex flex-col mb-2">
+            <!-- Breadcrumbs -->
+            <nav class="flex text-xs font-bold uppercase tracking-widest text-neutral-500 mb-3" aria-label="Breadcrumb">
+              <ol class="inline-flex items-center space-x-2">
+                <li>
+                  <a routerLink="/catalogo" class="hover:text-neutral-900 transition-colors">Catálogo</a>
+                </li>
+                <li>
+                  <span class="text-neutral-400">/</span>
+                </li>
+                <li>
+                  <a routerLink="/catalogo" [queryParams]="{category: product.category}" class="hover:text-neutral-900 transition-colors">{{ product.category }}</a>
+                </li>
+              </ol>
+            </nav>
+
+            <!-- Título del Producto -->
+            <h1 class="text-3xl sm:text-4xl font-medium text-neutral-900 leading-tight tracking-tight font-serif"
+                style="font-family: 'Lora', serif;">
+              {{ product.title }}
+            </h1>
+          </div>
+          
           <!-- Columna Izquierda: Imagen / Vista 3D -->
           <div class="lg:col-span-6 flex flex-col justify-center items-center relative bg-white rounded-2xl p-6 sm:p-10 border border-neutral-200/90 shadow-sm min-h-[420px] lg:min-h-[500px]">
             
@@ -109,8 +133,8 @@
           <!-- Columna Derecha: Información Principal y Acciones -->
           <div class="lg:col-span-6 flex flex-col justify-center">
             
-            <!-- Breadcrumbs -->
-            <nav class="flex text-xs font-bold uppercase tracking-widest text-neutral-500 mb-4" aria-label="Breadcrumb">
+            <!-- Breadcrumbs (Desktop only) -->
+            <nav class="hidden lg:flex text-xs font-bold uppercase tracking-widest text-neutral-500 mb-4" aria-label="Breadcrumb">
               <ol class="inline-flex items-center space-x-2">
                 <li>
                   <a routerLink="/catalogo" class="hover:text-neutral-900 transition-colors">Catálogo</a>
@@ -124,9 +148,9 @@
               </ol>
             </nav>
 
-            <!-- Título del Producto -->
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-medium text-neutral-900 mb-4 leading-tight tracking-tight font-serif"
-                style="font-family: 'TBJ Amoun', serif;">
+            <!-- Título del Producto (Desktop only) -->
+            <h1 class="hidden lg:block text-5xl font-medium text-neutral-900 mb-4 leading-tight tracking-tight font-serif"
+                style="font-family: 'Lora', serif;">
               {{ product.title }}
             </h1>
 

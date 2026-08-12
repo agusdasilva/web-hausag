@@ -46,7 +46,7 @@ export class CartComponent {
       text += `- ${item.quantity}x ${item.product.title} (SKU: ${item.product.sku})%0A`;
     });
     
-    const phone = '5491112345678'; // Falso por ahora, se actualizará luego
+    const phone = '5492236348144'; // Número actualizado
     const url = `https://wa.me/${phone}?text=${text}`;
     window.open(url, '_blank');
   }

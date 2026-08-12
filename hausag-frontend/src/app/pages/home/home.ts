@@ -123,12 +123,18 @@ export class Home implements OnInit, OnDestroy {
     }
   }
 
-  nextSlide() {
+  nextSlide(manual: boolean = false) {
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    if (manual) {
+      this.stopCarousel();
+      this.startCarousel();
+    }
   }
 
   prevSlide() {
     this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+    this.stopCarousel();
+    this.startCarousel();
   }
 
   goToSlide(index: number) {
@@ -136,5 +142,27 @@ export class Home implements OnInit, OnDestroy {
     // Reset interval when user interacts manually
     this.stopCarousel();
     this.startCarousel();
+  }
+
+  touchStartX = 0;
+  touchEndX = 0;
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+
+  handleSwipe() {
+    const swipeThreshold = 50;
+    if (this.touchEndX < this.touchStartX - swipeThreshold) {
+      this.nextSlide(true);
+    }
+    if (this.touchEndX > this.touchStartX + swipeThreshold) {
+      this.prevSlide();
+    }
   }
 }

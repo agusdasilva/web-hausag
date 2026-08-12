@@ -3,6 +3,7 @@ import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { ThemeService, ThemeMode } from '../../services/theme.service';
+import { AuthService, User } from '../../services/auth';
 import { Subscription, filter } from 'rxjs';
 
 @Component({
@@ -16,13 +17,17 @@ export class Header implements OnInit, OnDestroy {
   theme: ThemeMode = 'dark';
   hasHeroBanner = false;
   scrollY = 0;
+  userMenuOpen = false;
+  currentUser: User | null = null;
 
   private themeSub: Subscription | undefined;
   private routerSub: Subscription | undefined;
+  private userSub: Subscription | undefined;
 
   constructor(
     public cartService: CartService,
     private themeService: ThemeService,
+    public authService: AuthService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -35,6 +40,11 @@ export class Header implements OnInit, OnDestroy {
   ngOnInit() {
     this.themeSub = this.themeService.theme$.subscribe(t => {
       this.theme = t;
+      this.cdr.detectChanges();
+    });
+
+    this.userSub = this.authService.currentUser$.subscribe(u => {
+      this.currentUser = u;
       this.cdr.detectChanges();
     });
 
@@ -51,6 +61,7 @@ export class Header implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.themeSub) this.themeSub.unsubscribe();
     if (this.routerSub) this.routerSub.unsubscribe();
+    if (this.userSub) this.userSub.unsubscribe();
   }
 
   @HostListener('window:scroll', [])
@@ -65,15 +76,26 @@ export class Header implements OnInit, OnDestroy {
     return Math.min(this.scrollY / 150, 1);
   }
 
-  /** Estilo inline del header para transición suave */
+  /** Determina el tema efectivo del header. Si está sobre un banner y transparente, fuerza dark */
+  get effectiveTheme(): ThemeMode {
+    if (this.hasHeroBanner && this.theme === 'light' && this.headerBgOpacity < 0.6) {
+      return 'dark';
+    }
+    return this.theme;
+  }
+
   get headerStyle(): object {
     const op = this.headerBgOpacity;
+    const isLight = this.theme === 'light';
+    const r = isLight ? 255 : 0;
+    const g = isLight ? 255 : 0;
+    const b = isLight ? 255 : 0;
     return {
-      'background-color': `rgba(0, 0, 0, ${op})`,
+      'background-color': `rgba(${r}, ${g}, ${b}, ${op})`,
       'backdrop-filter': op > 0 ? `blur(${op * 12}px)` : 'none',
       '-webkit-backdrop-filter': op > 0 ? `blur(${op * 12}px)` : 'none',
-      'border-bottom-color': `rgba(255, 255, 255, ${op * 0.15})`,
-      'box-shadow': op > 0.3 ? `0 4px 30px rgba(0, 0, 0, ${op * 0.7})` : 'none',
+      'border-bottom-color': isLight ? `rgba(0, 0, 0, ${op * 0.1})` : `rgba(255, 255, 255, ${op * 0.15})`,
+      'box-shadow': op > 0.3 ? `0 4px 30px rgba(0, 0, 0, ${isLight ? op * 0.05 : op * 0.7})` : 'none',
     };
   }
 
@@ -83,6 +105,16 @@ export class Header implements OnInit, OnDestroy {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.userMenuOpen = false;
+    this.router.navigate(['/']);
   }
 }
 

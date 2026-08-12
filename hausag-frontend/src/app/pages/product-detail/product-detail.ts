@@ -128,7 +128,7 @@ export class ProductDetailComponent implements OnInit {
 
   getWhatsAppLink(): string {
     if (!this.product) return '';
-    const phone = '5491112345678'; // Falso por ahora
+    const phone = '5492236348144'; // Número actualizado
     const text = encodeURIComponent(`Hola Hausag, quería consultar por el producto: ${this.product.title} (SKU: ${this.product.sku})`);
     return `https://wa.me/${phone}?text=${text}`;
   }

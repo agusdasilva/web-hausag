@@ -1,25 +1,32 @@
-<div class="min-h-screen fade-in text-white">
+<div class="min-h-screen fade-in"
+     [ngClass]="theme === 'light' ? 'text-black-pure' : 'text-white'">
 
   <!-- ──── Hero Banner Superior ──── -->
-  <section class="relative w-full overflow-hidden bg-black-pure border-b border-white/10 min-h-[480px] md:min-h-[500px] flex items-center">
+  <!-- Mantengo los colores oscuros por defecto aquí porque el banner tiene una imagen de fondo oscura -->
+  <section class="relative w-full overflow-hidden min-h-[480px] md:min-h-[500px] flex items-center border-b"
+           [ngClass]="theme === 'light' ? 'border-black/10' : 'border-white/10'">
     
     <!-- Imagen de fondo -->
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 z-10" style="background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 100%);"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 z-10"></div>
+    <div class="absolute inset-0">
       <img src="/assets/images/banner nosotros.jpg" 
            alt="Sobre Nosotros Hausag" 
-           class="w-full h-full object-cover object-center opacity-100 transform scale-105 animate-subtle-zoom">
+           class="absolute inset-0 w-full h-full object-cover object-center transform scale-105 animate-subtle-zoom">
+      <!-- Gradientes encima de la imagen -->
+      <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 100%);"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10"></div>
     </div>
 
     <!-- Contenido del Banner -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 w-full text-left">
       <div class="max-w-3xl">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/20 bg-[#1a1a1a]/80 backdrop-blur-sm text-white/90 mb-6 shadow-xl">
-          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-          Más de 50 años de trayectoria y confianza
-        </span>
-        <h1 class="text-5xl md:text-6xl font-serif font-medium text-white tracking-wide leading-tight drop-shadow-lg mb-4">Sobre Nosotros</h1>
+        <!-- Subtítulo con línea de acento -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-10 h-[1px] bg-white/70"></div>
+          <span class="text-white/80 font-semibold uppercase tracking-[0.4em] text-[11px]">
+            Más de 50 años de trayectoria y confianza
+          </span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-white tracking-wide leading-tight drop-shadow-lg mb-4" style="font-family: 'Lora', serif;">Sobre Nosotros</h1>
         <p class="text-lg md:text-xl text-white/90 font-extralight tracking-wide leading-relaxed drop-shadow-md">
           Medio siglo creando experiencias de diseño, confort y durabilidad para cada rincón de tu hogar.
         </p>
@@ -34,30 +41,37 @@
     
     <!-- Dónde Encontrarnos / Mapa de Google -->
     <div class="w-full md:w-1/2 flex flex-col">
-      <div class="h-full bg-black-surface p-6 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between">
+      <div class="h-full p-6 rounded-2xl border flex flex-col justify-between transition-colors"
+           [ngClass]="theme === 'light' ? 'bg-neutral-100 border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]' : 'bg-black-surface border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]'">
         
         <!-- Info Cabecera del Mapa -->
         <div class="mb-4">
           <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-white/90 font-mono">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest font-mono"
+                  [ngClass]="theme === 'light' ? 'text-black/80' : 'text-white/90'">
+              <svg class="w-4 h-4" [ngClass]="theme === 'light' ? 'text-black' : 'text-white'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               ¿Dónde encontrarnos?
             </span>
-            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded border border-white/20 text-white/60">Showroom & Salón</span>
+            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded border"
+                  [ngClass]="theme === 'light' ? 'border-black/20 text-black/60' : 'border-white/20 text-white/60'">Showroom & Salón</span>
           </div>
-          <h3 class="text-xl font-serif font-medium text-white mb-1">El Águila Sanitarios</h3>
-          <p class="text-sm text-white/80 font-extralight flex items-center gap-2">
-            <span class="font-medium text-white">Av. Jara 866</span> — Mar del Plata, Buenos Aires
+          <h3 class="text-xl font-serif font-medium mb-1"
+              [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">El Águila Sanitarios</h3>
+          <p class="text-sm font-extralight flex items-center gap-2"
+             [ngClass]="theme === 'light' ? 'text-black/70' : 'text-white/80'">
+            <span class="font-medium" [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">Av. Jara 866</span> — Mar del Plata, Buenos Aires
           </p>
         </div>
 
         <!-- Google Maps Embed interactivo -->
-        <div class="relative w-full h-[280px] md:h-[320px] rounded-xl overflow-hidden border border-white/10 mb-4 bg-black-pure">
+        <div class="relative w-full h-[280px] md:h-[320px] rounded-xl overflow-hidden border mb-4"
+             [ngClass]="theme === 'light' ? 'border-black/10 bg-white' : 'border-white/10 bg-black-pure'">
           <iframe 
             src="https://maps.google.com/maps?q=Av.+Jara+866,+Mar+del+Plata,+Provincia+de+Buenos+Aires&t=&z=16&ie=UTF8&iwloc=&output=embed" 
             width="100%" 
             height="100%" 
-            style="border:0; filter: grayscale(100%) invert(90%) contrast(85%);" 
+            [style.filter]="theme === 'light' ? 'grayscale(100%)' : 'grayscale(100%) invert(90%) contrast(85%)'"
+            style="border:0;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
@@ -67,13 +81,15 @@
 
         <!-- Botón de apertura directa y horarios -->
         <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <div class="text-white/60 font-extralight text-center sm:text-left">
-            <p><strong class="text-white/80 font-medium">Horarios:</strong> Lun a Vie 8:00 - 18:00 | Sáb 8:30 - 13:00</p>
+          <div class="font-extralight text-center sm:text-left"
+               [ngClass]="theme === 'light' ? 'text-black/60' : 'text-white/60'">
+            <p><strong class="font-medium" [ngClass]="theme === 'light' ? 'text-black/80' : 'text-white/80'">Horarios:</strong> Lun a Vie 8:00 - 18:00 | Sáb 8:30 - 13:00</p>
           </div>
           <a href="https://maps.google.com/?q=Av.+Jara+866,+Mar+del+Plata" 
              target="_blank" 
              rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] hover:bg-white hover:text-black-pure border border-white/20 text-white font-bold text-[11px] uppercase tracking-widest transition-all">
+             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border font-bold text-[11px] uppercase tracking-widest transition-all"
+             [ngClass]="theme === 'light' ? 'bg-gray-100 hover:bg-black hover:text-white border-black/20 text-black' : 'bg-[#1a1a1a] hover:bg-white hover:text-black-pure border-white/20 text-white'">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             Abrir en Google Maps
           </a>
@@ -84,14 +100,16 @@
     
     <!-- Contenido Historia -->
     <div class="md:w-1/2 mt-10 md:mt-0 flex flex-col justify-center">
-      <h2 class="text-3xl md:text-4xl font-serif font-medium text-white mb-6 tracking-wide">Nuestra Historia</h2>
+      <h2 class="text-3xl md:text-4xl font-serif font-medium mb-6 tracking-wide"
+          [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">Nuestra Historia</h2>
       
-      <div class="space-y-5 text-white/75 font-extralight leading-relaxed tracking-wide text-base">
+      <div class="space-y-5 font-extralight leading-relaxed tracking-wide text-base"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white/75'">
         <p>
-          Con <strong class="text-white font-medium">más de 50 años en el mercado</strong> a través de <strong class="text-white font-medium">El Águila Sanitarios</strong>, consolidamos nuestra experiencia como referentes en el rubro sanitario y de la construcción.
+          Con <strong class="font-medium" [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">más de 50 años en el mercado</strong> a través de <strong class="font-medium" [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">El Águila Sanitarios</strong>, consolidamos nuestra experiencia como referentes en el rubro sanitario y de la construcción.
         </p>
         <p>
-          <strong class="text-white font-medium">Hausag</strong> nace como nuestra firma insignia de alta gama, pensada para responder a las exigencias de la arquitectura contemporánea: líneas sofisticadas, materiales nobles como el latón macizo y tecnologías que optimizan el rendimiento del agua y la calefacción.
+          <strong class="font-medium" [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">Hausag</strong> nace como nuestra firma insignia de alta gama, pensada para responder a las exigencias de la arquitectura contemporánea: líneas sofisticadas, materiales nobles como el latón macizo y tecnologías que optimizan el rendimiento del agua y la calefacción.
         </p>
         <p>
           Acompañamos a arquitectos, diseñadores, instaladores y familias que eligen transformar sus ambientes en espacios únicos con productos garantizados y servicio de asesoramiento personalizado.
@@ -99,9 +117,11 @@
       </div>
 
       <!-- Quote Box -->
-      <div class="my-8 p-6 rounded-xl border border-white/25 shadow-[0_20px_40px_rgba(0,0,0,0.9)] relative overflow-hidden" 
-           style="background-color: #000000 !important; border-left: 4px solid #ffffff;">
-        <p class="text-xl md:text-2xl font-serif font-normal italic text-white leading-snug">
+      <div class="my-8 p-6 rounded-xl border relative overflow-hidden" 
+           [ngClass]="theme === 'light' ? 'border-black/10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] bg-neutral-100' : 'border-white/25 shadow-[0_20px_40px_rgba(0,0,0,0.9)] bg-[#000000]'"
+           [style.border-left]="theme === 'light' ? '4px solid #000000' : '4px solid #ffffff'">
+        <p class="text-xl md:text-2xl font-serif font-normal italic leading-snug"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">
           "Diseño, elegancia y calidad en cada gota y en cada ambiente."
         </p>
       </div>
@@ -109,12 +129,14 @@
       <!-- Botón CTA -->
       <div class="flex items-center gap-4 pt-2">
         <a routerLink="/catalogo" 
-           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-white text-black-pure font-bold text-xs uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:-translate-y-0.5 shadow-lg">
+           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all transform hover:-translate-y-0.5 shadow-lg"
+           [ngClass]="theme === 'light' ? 'bg-black text-white hover:bg-gray-800' : 'bg-white text-black-pure hover:bg-gray-200'">
           Explorar Catálogo
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
         <a routerLink="/contacto" 
-           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border font-bold text-xs uppercase tracking-widest transition-all"
+           [ngClass]="theme === 'light' ? 'border-black/20 text-black hover:bg-black/5' : 'border-white/20 text-white hover:bg-white/10'">
           Contactar
         </a>
       </div>
@@ -123,30 +145,47 @@
   </div>
 
   <!-- Métricas / Pilares -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t"
+       [ngClass]="theme === 'light' ? 'border-black/10' : 'border-white/10'">
     
-    <div class="p-6 rounded-xl bg-black-surface border border-white/10">
-      <div class="text-3xl font-serif font-semibold text-white mb-1">+50 Años</div>
-      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Trayectoria</div>
-      <p class="text-xs text-white/70 font-extralight leading-relaxed">Décadas de confianza construyendo relaciones sólidas con el mercado argentino.</p>
+    <div class="p-6 rounded-xl border"
+         [ngClass]="theme === 'light' ? 'bg-neutral-100 border-black/10 shadow-md' : 'bg-black-surface border-white/10'">
+      <div class="text-3xl font-serif font-semibold mb-1" style="font-family: 'Lora', serif;"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">+50 Años</div>
+      <div class="text-xs font-mono uppercase tracking-widest mb-2"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white/50'">Trayectoria</div>
+      <p class="text-xs font-extralight leading-relaxed"
+         [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Décadas de confianza construyendo relaciones sólidas con el mercado argentino.</p>
     </div>
 
-    <div class="p-6 rounded-xl bg-black-surface border border-white/10">
-      <div class="text-3xl font-serif font-semibold text-white mb-1">100%</div>
-      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Calidad Premium</div>
-      <p class="text-xs text-white/70 font-extralight leading-relaxed">Selección de materiales resistentes, cartuchos cerámicos y finos acabados.</p>
+    <div class="p-6 rounded-xl border"
+         [ngClass]="theme === 'light' ? 'bg-neutral-100 border-black/10 shadow-md' : 'bg-black-surface border-white/10'">
+      <div class="text-3xl font-serif font-semibold mb-1" style="font-family: 'Lora', serif;"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">100%</div>
+      <div class="text-xs font-mono uppercase tracking-widest mb-2"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white/50'">Calidad Premium</div>
+      <p class="text-xs font-extralight leading-relaxed"
+         [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Selección de materiales resistentes, cartuchos cerámicos y finos acabados.</p>
     </div>
 
-    <div class="p-6 rounded-xl bg-black-surface border border-white/10">
-      <div class="text-3xl font-serif font-semibold text-white mb-1">5 Años</div>
-      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Garantía Oficial</div>
-      <p class="text-xs text-white/70 font-extralight leading-relaxed">Respaldo postventa integral y repuestos originales disponibles.</p>
+    <div class="p-6 rounded-xl border"
+         [ngClass]="theme === 'light' ? 'bg-neutral-100 border-black/10 shadow-md' : 'bg-black-surface border-white/10'">
+      <div class="text-3xl font-serif font-semibold mb-1" style="font-family: 'Lora', serif;"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">5 Años</div>
+      <div class="text-xs font-mono uppercase tracking-widest mb-2"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white/50'">Garantía Oficial</div>
+      <p class="text-xs font-extralight leading-relaxed"
+         [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Respaldo postventa integral y repuestos originales disponibles.</p>
     </div>
 
-    <div class="p-6 rounded-xl bg-black-surface border border-white/10">
-      <div class="text-3xl font-serif font-semibold text-white mb-1">Asesoría</div>
-      <div class="text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Personalizada</div>
-      <p class="text-xs text-white/70 font-extralight leading-relaxed">Atención experta para proyectos residenciales, comerciales y profesionales.</p>
+    <div class="p-6 rounded-xl border"
+         [ngClass]="theme === 'light' ? 'bg-neutral-100 border-black/10 shadow-md' : 'bg-black-surface border-white/10'">
+      <div class="text-3xl font-serif font-semibold mb-1" style="font-family: 'Lora', serif;"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white'">Asesoría</div>
+      <div class="text-xs font-mono uppercase tracking-widest mb-2"
+           [ngClass]="theme === 'light' ? 'text-black' : 'text-white/50'">Personalizada</div>
+      <p class="text-xs font-extralight leading-relaxed"
+         [ngClass]="theme === 'light' ? 'text-black' : 'text-white/70'">Atención experta para proyectos residenciales, comerciales y profesionales.</p>
     </div>
 
   </div>

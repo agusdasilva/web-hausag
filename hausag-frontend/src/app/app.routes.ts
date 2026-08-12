@@ -7,6 +7,10 @@ import { Faq } from './pages/faq/faq';
 import { Contact } from './pages/contact/contact';
 import { CartComponent } from './pages/cart/cart';
 
+import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
+import { ProfileComponent } from './pages/profile/profile';
+
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'catalogo', component: CatalogComponent },
@@ -15,5 +19,8 @@ export const routes: Routes = [
   { path: 'faq', component: Faq },
   { path: 'contacto', component: Contact },
   { path: 'carrito', component: CartComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegisterComponent },
+  { path: 'perfil', component: ProfileComponent },
   { path: '**', redirectTo: '' }
 ];
