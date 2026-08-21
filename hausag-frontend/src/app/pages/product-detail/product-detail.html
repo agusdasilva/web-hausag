@@ -21,7 +21,7 @@
   <div *ngIf="product && !loading && !error" class="fade-in">
     
     <!-- ──── 1. PRIMER BLOQUE: IMAGEN + INFORMACIÓN PRINCIPAL (FULL WIDTH, PEGADO AL HEADER) ──── -->
-    <section class="w-full bg-white border-b border-neutral-200 pt-14">
+    <section class="w-full bg-white border-b border-neutral-200 pt-32">
       <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-6 sm:pb-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
@@ -86,16 +86,19 @@
             </div>
 
             <!-- Vista 2D Foto -->
-            <div class="flex-1 w-full flex justify-center items-center py-4" [ngClass]="{'hidden': has3DModel && show3D}">
+            <div class="flex-1 w-full flex justify-center items-center py-4"
+                 [style.display]="has3DModel && show3D ? 'none' : 'flex'">
               <img [src]="product.image_url" [alt]="product.title"
                    class="max-w-full max-h-[460px] object-contain transition-transform duration-500 hover:scale-105">
             </div>
 
             <!-- Vista 3D Interactiva -->
-            <div *ngIf="has3DModel" class="flex-1 w-full flex flex-col" [ngClass]="{'hidden': !show3D}" style="min-height: 460px;">
+            <div *ngIf="has3DModel && show3D" class="flex-1 w-full flex flex-col"
+                 style="min-height: 460px;">
               <model-viewer
                 [src]="model3DUrl"
                 alt="Vista 3D del producto"
+                loading="eager"
                 auto-rotate
                 rotation-per-second="25deg"
                 camera-controls
@@ -322,7 +325,7 @@
           <div id="related-carousel" class="flex-1 flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 pt-2 px-1 scroll-smooth" style="scrollbar-width: none;">
             <div *ngFor="let rel of relatedProducts"
                  class="w-[calc(50%-8px)] md:w-[calc(25%-18px)] flex-none snap-start group cursor-pointer rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 border border-neutral-200/90 bg-white shadow-xs hover:shadow-lg flex flex-col"
-                 [routerLink]="['/producto', rel.id]">
+                 [routerLink]="['/catalogo', rel.id]">
               
               <!-- Imagen fondo blanco -->
               <div class="aspect-square p-5 flex items-center justify-center relative bg-white">

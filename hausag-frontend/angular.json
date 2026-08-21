@@ -22,7 +22,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.css"

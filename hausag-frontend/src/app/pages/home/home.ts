@@ -22,49 +22,49 @@ export class Home implements OnInit, OnDestroy {
     {
       name: 'Grifería Niza – Oro Cepillado',
       category: 'Griferías de Cocina',
-      image: '/assets/images/productos ambientados/HAUS-1027.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1027.jpg',
       link: '/catalogo/131',
       queryParams: {}
     },
     {
       name: 'Radiador 500mm · 6 Elementos',
       category: 'Calefacción',
-      image: '/assets/images/productos ambientados/HAUS-1005.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1005.jpg',
       link: '/catalogo/109',
       queryParams: {}
     },
     {
       name: 'Grifería Riga – Cuello Profesional',
       category: 'Griferías de Cocina',
-      image: '/assets/images/productos ambientados/HAUS-1024.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1024.jpg',
       link: '/catalogo/128',
       queryParams: {}
     },
     {
       name: 'Grifería Niza – Negro & Cobre',
       category: 'Griferías de Cocina',
-      image: '/assets/images/productos ambientados/HAUS-1025.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1025.jpg',
       link: '/catalogo/129',
       queryParams: {}
     },
     {
       name: 'Grifería Lyon – Cromo Brillante',
       category: 'Griferías de Cocina',
-      image: '/assets/images/productos ambientados/HAUS-1044.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1044.jpg',
       link: '/catalogo/148',
       queryParams: {}
     },
     {
       name: 'Toallero Radiador Cromado 77×45',
       category: 'Calefacción',
-      image: '/assets/images/productos ambientados/TOALLERO-CR.jpg',
+      image: 'assets/images/productos ambientados/TOALLERO-CR.jpg',
       link: '/catalogo/125',
       queryParams: {}
     },
     {
       name: 'Toallero Radiador Blanco 77×45',
       category: 'Calefacción',
-      image: '/assets/images/productos ambientados/HAUS-1046.jpg',
+      image: 'assets/images/productos ambientados/HAUS-1046.jpg',
       link: '/catalogo/150',
       queryParams: {}
     }
@@ -76,7 +76,8 @@ export class Home implements OnInit, OnDestroy {
       subtitle: 'Diseño exclusivo',
       description: 'Descubre nuestra línea completa de productos pensados para darle el toque final de elegancia a tu construcción o remodelación.',
       image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-      link: '/catalogo',
+      route: '/catalogo',
+      queryParams: {},
       buttonText: 'Ver Catálogo Completo'
     },
     {
@@ -84,7 +85,8 @@ export class Home implements OnInit, OnDestroy {
       subtitle: 'Para cocina y baño',
       description: 'Renueva tus espacios con nuestra colección de griferías. Estilos modernos, minimalistas y duraderos.',
       image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-      link: '/catalogo?category=Grifer%C3%ADa%20de%20Cocina',
+      route: '/catalogo',
+      queryParams: { category: 'Griferías - Cocina' },
       buttonText: 'Ver Griferías'
     },
     {
@@ -92,7 +94,8 @@ export class Home implements OnInit, OnDestroy {
       subtitle: 'Confort en tu hogar',
       description: 'Mantén tus ambientes cálidos con equipos eficientes, seguros y diseñados para integrarse a tu decoración.',
       image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-      link: '/catalogo?category=Calefacci%C3%B3n',
+      route: '/catalogo',
+      queryParams: { category: 'Calefacción' },
       buttonText: 'Ver Calefacción'
     }
   ];

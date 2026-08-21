@@ -40,11 +40,11 @@ export class ProductDetailComponent implements OnInit {
   get has3DModel(): boolean {
     if (!this.product) return false;
     // El modelo 3D solo está disponible para el producto 131 (HAUS-1027)
-    return this.product.id === 131 || this.product.sku === 'HAUS-1027';
+    return Number(this.product.id) === 131 || this.product.sku === 'HAUS-1027';
   }
 
   get model3DUrl(): string {
-    return '/assets/models/HAUS-1027.glb';
+    return '/test/assets/models/HAUS-1027.glb';
   }
 
   ngOnInit(): void {

@@ -9,7 +9,7 @@
    ─────────────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'TBJ Amoun';
-  src: url('/assets/fonts/tbj-amoun/Amoun Lite Edition.ttf') format('truetype');
+  src: url('assets/fonts/tbj-amoun/Amoun Lite Edition.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Lora';
-  src: url('/assets/fonts/lora/Lora-Regular.ttf') format('truetype');
+  src: url('assets/fonts/lora/Lora-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: 'Lora';
-  src: url('/assets/fonts/lora/Lora-Bold.ttf') format('truetype');
+  src: url('assets/fonts/lora/Lora-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -52,4 +52,34 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Background fijo (sin parallax en mobile) ───────────────────────
+   Se usa ::before sobre .app-shell para que el fondo sea realmente
+   estático en todos los navegadores móviles.
+   ─────────────────────────────────────────────────────────────────── */
+.app-shell {
+  position: relative;
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: background 0.7s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Modo oscuro: textura dark */
+.app-shell.theme-dark::before {
+  background-image: url('/test/assets/images/dark_texture.webp');
+}
+
+/* Modo claro: textura mármol */
+.app-shell.theme-light::before {
+  background-image: url('/test/assets/images/textura-marmol-blanco-fondo_42682-286.avif');
+  background-color: #ffffff;
 }

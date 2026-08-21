@@ -20,6 +20,7 @@ export class CatalogComponent implements OnInit {
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
   loading = true;
+  griferiasMenuOpen = false;
 
   constructor(
     private productService: ProductService,
@@ -96,6 +97,12 @@ export class CatalogComponent implements OnInit {
 
   onCategoryChange(category: string): void {
     this.selectedCategory = category;
+    this.griferiasMenuOpen = false;
     this.applyFilters();
+  }
+
+  toggleGriferias(event: Event): void {
+    event.stopPropagation();
+    this.griferiasMenuOpen = !this.griferiasMenuOpen;
   }
 }

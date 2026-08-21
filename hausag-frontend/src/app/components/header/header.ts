@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { ThemeService, ThemeMode } from '../../services/theme.service';
 import { AuthService, User } from '../../services/auth';
+import { ProductService, Product } from '../../services/product';
 import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -19,6 +21,11 @@ export class Header implements OnInit, OnDestroy {
   scrollY = 0;
   userMenuOpen = false;
   currentUser: User | null = null;
+  searchOpen = false;
+  searchQuery = '';
+  searchSuggestions: Product[] = [];
+  allProducts: Product[] = [];
+  mobileSearchOpen = false;
 
   private themeSub: Subscription | undefined;
   private routerSub: Subscription | undefined;
@@ -29,7 +36,8 @@ export class Header implements OnInit, OnDestroy {
     private themeService: ThemeService,
     public authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private productService: ProductService
   ) {}
 
   private checkHeroBanner(url: string): boolean {
@@ -46,6 +54,11 @@ export class Header implements OnInit, OnDestroy {
     this.userSub = this.authService.currentUser$.subscribe(u => {
       this.currentUser = u;
       this.cdr.detectChanges();
+    });
+
+    // Cargar productos para sugerencias
+    this.productService.getProducts().subscribe(products => {
+      this.allProducts = products;
     });
 
     // Detectar si estamos en una página con hero banner al inicio y en cada navegación
@@ -109,6 +122,71 @@ export class Header implements OnInit, OnDestroy {
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  toggleSearch() {
+    this.searchOpen = !this.searchOpen;
+    if (this.searchOpen) {
+      this.searchQuery = '';
+      this.searchSuggestions = [];
+      setTimeout(() => {
+        const input = document.getElementById('header-search-input');
+        if (input) (input as HTMLInputElement).focus();
+      }, 50);
+    } else {
+      this.searchSuggestions = [];
+    }
+  }
+
+  toggleMobileSearch() {
+    this.mobileSearchOpen = !this.mobileSearchOpen;
+    if (this.mobileSearchOpen) {
+      this.searchQuery = '';
+      this.searchSuggestions = [];
+      setTimeout(() => {
+        const input = document.getElementById('header-search-mobile-inline');
+        if (input) (input as HTMLInputElement).focus();
+      }, 50);
+    } else {
+      this.searchSuggestions = [];
+    }
+  }
+
+  onSearchInput() {
+    const q = this.searchQuery.trim().toLowerCase();
+    if (q.length >= 2) {
+      this.searchSuggestions = this.allProducts
+        .filter(p => p.title.toLowerCase().includes(q) || (p.sku && p.sku.toLowerCase().includes(q)))
+        .slice(0, 3);
+    } else {
+      this.searchSuggestions = [];
+    }
+  }
+
+  goToSuggestion(product: Product) {
+    this.router.navigate(['/catalogo', product.id]);
+    this.searchOpen = false;
+    this.mobileSearchOpen = false;
+    this.menuOpen = false;
+    this.searchQuery = '';
+    this.searchSuggestions = [];
+  }
+
+  submitSearch() {
+    const q = this.searchQuery.trim();
+    if (q) {
+      this.router.navigate(['/catalogo'], { queryParams: { search: q } });
+      this.searchOpen = false;
+      this.mobileSearchOpen = false;
+      this.searchQuery = '';
+      this.searchSuggestions = [];
+      this.menuOpen = false;
+    }
+  }
+
+  onSearchKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') this.submitSearch();
+    if (event.key === 'Escape') { this.searchOpen = false; this.mobileSearchOpen = false; this.searchSuggestions = []; }
   }
 
   logout() {

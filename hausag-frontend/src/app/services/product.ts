@@ -21,7 +21,7 @@ export interface Product {
 export class ProductService {
   // En desarrollo usamos el servidor PHP local (ej: puerto 8000). En producción, ruta relativa.
   private get backendUrl(): string {
-    return isDevMode() ? 'http://localhost:8000' : '';
+    return isDevMode() ? 'http://localhost:3000' : '/test';
   }
 
   private get apiUrl(): string {
@@ -31,8 +31,17 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   private fixImageUrl(product: Product): Product {
-    if (product.image_url && product.image_url.startsWith('/')) {
-      return { ...product, image_url: this.backendUrl + product.image_url };
+    if (product.image_url) {
+      let newUrl = product.image_url;
+      // Convertir rutas del backend al path local de Angular
+      if (newUrl.startsWith('/productos/')) {
+        newUrl = newUrl.replace('/productos/', 'assets/images/productos/');
+      }
+      // Quitar barra inicial si existe (para que respete el base-href)
+      if (newUrl.startsWith('/')) {
+        newUrl = newUrl.substring(1);
+      }
+      return { ...product, image_url: newUrl };
     }
     return product;
   }
