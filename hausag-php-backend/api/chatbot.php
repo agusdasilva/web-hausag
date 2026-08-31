@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -9,29 +9,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// Aumentar el tiempo máximo de ejecución a 120 segundos para evitar timeouts de cURL
+// Aumentar el tiempo mÃ¡ximo de ejecuciÃ³n a 120 segundos para evitar timeouts de cURL
 set_time_limit(120);
 
-// Clave API de Gemini — leída desde archivo de configuración (NO en Git)
-$configFile = __DIR__ . '/../../config.php';
+// Clave API de Gemini â€” leÃ­da desde archivo de configuraciÃ³n (NO en Git)
+$configFile$configFile = __DIR__ . '/../config.php';
 if (file_exists($configFile)) {
     require_once $configFile;
 }
 $apiKey = defined('GEMINI_API_KEY') ? GEMINI_API_KEY : getenv('GEMINI_API_KEY');
 $geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=" . $apiKey;
 
-$systemInstruction = "Eres un asistente virtual de ventas para 'El Águila Sanitarios' / 'Hausag'.
-Es una empresa con sede en Mar del Plata que ofrece soluciones integrales en instalaciones sanitarias, gas, calefacción e industriales desde 1995.
+$systemInstruction = "Eres un asistente virtual de ventas para 'El Ãguila Sanitarios' / 'Hausag'.
+Es una empresa con sede en Mar del Plata que ofrece soluciones integrales en instalaciones sanitarias, gas, calefacciÃ³n e industriales desde 1995.
 
 Tus reglas principales son:
-1. Responde siempre de forma muy amable, profesional y concisa (ideal para leer rápido en un pequeño chat web).
-2. Si el cliente pregunta por un presupuesto específico o disponibilidad de un producto (como caños, griferías, calderas), dile amablemente que para dar un precio exacto o verificar stock necesitamos que nos envíe su consulta, o bien que un vendedor especializado se pondrá en contacto pronto.
-3. Si la pregunta es muy técnica sobre instalaciones, pide que deje su consulta detallada y ofrécele que un técnico lo asesore.
-4. El horario de atención comercial es de Lunes a Viernes de 8:00 a 16:00 hs. (Si preguntan, indícalo).
-5. Como estás integrado directamente en la web, si te preguntan por un producto puedes sugerir que naveguen por el catálogo online.
-6. IMPORTANTE: Escribe TODAS tus respuestas en TEXTO PLANO. NO uses formato Markdown (no uses asteriscos para negritas ** ni cursivas *, no uses listas con viñetas de Markdown).
+1. Responde siempre de forma muy amable, profesional y concisa (ideal para leer rÃ¡pido en un pequeÃ±o chat web).
+2. Si el cliente pregunta por un presupuesto especÃ­fico o disponibilidad de un producto (como caÃ±os, griferÃ­as, calderas), dile amablemente que para dar un precio exacto o verificar stock necesitamos que nos envÃ­e su consulta, o bien que un vendedor especializado se pondrÃ¡ en contacto pronto.
+3. Si la pregunta es muy tÃ©cnica sobre instalaciones, pide que deje su consulta detallada y ofrÃ©cele que un tÃ©cnico lo asesore.
+4. El horario de atenciÃ³n comercial es de Lunes a Viernes de 8:00 a 16:00 hs. (Si preguntan, indÃ­calo).
+5. Como estÃ¡s integrado directamente en la web, si te preguntan por un producto puedes sugerir que naveguen por el catÃ¡logo online.
+6. IMPORTANTE: Escribe TODAS tus respuestas en TEXTO PLANO. NO uses formato Markdown (no uses asteriscos para negritas ** ni cursivas *, no uses listas con viÃ±etas de Markdown).
 
-Atiéndelo rápido y mantén un tono servicial.";
+AtiÃ©ndelo rÃ¡pido y mantÃ©n un tono servicial.";
 
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, TRUE);
@@ -80,7 +80,7 @@ if (curl_errno($ch)) {
 } else {
     $decoded = json_decode($response, true);
 
-    // Extraer solo el texto limpio y devolver en formato estándar que Angular espera
+    // Extraer solo el texto limpio y devolver en formato estÃ¡ndar que Angular espera
     if ($decoded && isset($decoded['candidates'][0]['content']['parts'][0]['text'])) {
         $text = $decoded['candidates'][0]['content']['parts'][0]['text'];
         http_response_code(200);
@@ -102,3 +102,4 @@ if (curl_errno($ch)) {
 }
 curl_close($ch);
 ?>
+

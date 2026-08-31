@@ -58,7 +58,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // Optional: Add a welcome message
     this.messages.push({
-      text: '¡Hola! Soy el asistente virtual de El Águila Sanitarios. ¿En qué te puedo ayudar hoy?',
+      text: '¡Hola! Bienvenido a Hausag. Soy tu asistente virtual. ¿En qué te puedo ayudar hoy?',
       isUser: false
     });
   }

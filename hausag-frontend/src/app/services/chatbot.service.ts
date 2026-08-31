@@ -14,7 +14,7 @@ export class ChatbotService {
   // Usa siempre el mismo origen (protocolo + host + puerto) que la página actual
   // Así funciona en localhost:8080, en producción y en cualquier servidor
   private get apiUrl(): string {
-    return `${window.location.origin}/test/api/chatbot.php`;
+    return `${window.location.origin}/api/chatbot.php`;
   }
 
   constructor(private http: HttpClient) {}

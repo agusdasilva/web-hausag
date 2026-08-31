@@ -15,7 +15,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = isDevMode() ? 'http://localhost:3000/api' : '/test/api';
+  private apiUrl = isDevMode() ? 'http://localhost:3000/api' : '/api';
   
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();

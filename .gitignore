@@ -14,3 +14,26 @@ dist/
 .env
 .DS_Store
 Thumbs.db
+
+# Sensitive config (API keys)
+hausag-php-backend/config.php
+local_server/config.php
+local_server/test/config.php
+deploy_build_root/config.php
+deploy_build/test/config.php
+
+# Deploy artifacts & temp folders
+hausag_produccion.zip
+deploy_build/
+deploy_build_root/
+temp_extract/
+local_server/
+_Scripts_y_Temporales/
+
+# Temp scripts
+fix*.js
+fix*.php
+
+# Non-code files
+Hausag.xls
+Catalogo_Griferias_Hausag.pdf

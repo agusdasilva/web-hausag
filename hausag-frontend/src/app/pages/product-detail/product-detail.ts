@@ -44,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   get model3DUrl(): string {
-    return '/test/assets/models/HAUS-1027.glb';
+    return '/assets/models/HAUS-1027.glb';
   }
 
   ngOnInit(): void {
