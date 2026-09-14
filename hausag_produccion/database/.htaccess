@@ -1,0 +1,4 @@
+# Denegar acceso directo al directorio de la base de datos
+<Files "*">
+    Require all denied
+</Files>

@@ -75,11 +75,11 @@ body {
 
 /* Modo oscuro: textura dark */
 .app-shell.theme-dark::before {
-  background-image: url('/test/assets/images/dark_texture.webp');
+  background-image: url('/assets/images/dark_texture.webp');
 }
 
 /* Modo claro: textura mármol */
 .app-shell.theme-light::before {
-  background-image: url('/test/assets/images/textura-marmol-blanco-fondo_42682-286.avif');
+  background-image: url('/assets/images/textura-marmol-blanco-fondo_42682-286.avif');
   background-color: #ffffff;
 }

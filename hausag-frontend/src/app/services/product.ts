@@ -21,7 +21,7 @@ export interface Product {
 export class ProductService {
   // En desarrollo usamos el servidor PHP local (ej: puerto 8000). En producción, ruta relativa.
   private get backendUrl(): string {
-    return isDevMode() ? 'http://localhost:3000' : '/test';
+    return isDevMode() ? 'http://localhost:3000' : '';
   }
 
   private get apiUrl(): string {
